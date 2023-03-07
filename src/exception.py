@@ -1,0 +1,27 @@
+import sys 
+import logger
+def exception_details(error,error_message:sys):
+
+    _,_,err_info = error_message.exc_info()
+    file_name = err_info.tb_frame.f_code.co_filename
+    err_message = "Exception raised in the line [{0}] error message [{1}] in the file[{2}]".format(err_info.tb_lineno,str(error),file_name)
+
+    return err_message
+
+
+class CustomException(Exception):
+
+    def __init__(self,error,error_message:sys):
+        super().__init__(error)
+        self.error_message = exception_details(error,error_message=error_message)
+
+    def __str__(self) -> str:
+        return self.error_message
+
+
+if __name__ == "__main__":
+    try:
+        a = 1/0
+    except Exception as e:
+        logger.logging.info("Divide by Zero exception raised")
+        raise CustomException(e,sys)
