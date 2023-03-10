@@ -1,34 +1,19 @@
 import sys
-import sqlite3
-# import logger 
+import sqlite3 
+from src.logger import logging
+from src.exception import CustomException
+from src.utils import DBconnection
 
-class DBconnection:
 
-    columns = {
-        'id':'INTEGER',
-        'name':'TEXT'
-    }
+class DBopeartions:
+
     def __init__(self):
-        # logger.logging.info('Constructor is getting executed....')
-        self.dbname = 'dbcon'
-        
-    def getDBconnection(self):
-        connection = sqlite3.connect(self.dbname+'')
-        # logger.logging.info('connection object..',connection)
-        return connection
-    
-    def createTable(self):
-        connection = self.getDBconnection()
-        # exec = connection.execute('create table demo (id INTEGER,name TEXT)')
-        # logger.logging.info('create table command is executed...',exec)
+       
+        print("This is a db connection string", DBconnection().get_DBconnection())
 
 
-
-        
 
 if __name__ == "__main__":
-    # logger.logging.info('The Dbconnection class is started executing....')
-    # print(sys.path)
-    obj = DBconnection()
-    obj.createTable()
-    print("connection statrted")
+    DBopeartions()
+
+        
